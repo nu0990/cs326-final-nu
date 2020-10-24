@@ -1,6 +1,5 @@
+# Data Interaction
 
-#Data Interaction
+# WireFrames
 
-#WireFrames
-
-#HTML and CSS
+# HTML and CSS
