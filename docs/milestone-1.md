@@ -1,4 +1,17 @@
 # Data Interaction
+Data about each server node:
+* Including basic server information, location, server ip address
+* And the information obtained from the server, the current delay and the number of users in each time period
+* And the information retained by this site, including user reviews, user usage, and user comments</br>
+
+User's personal information:
+
+* email address, telegram account used to log in quickly, other contact methods
+* User’s password and authentication method (if any)
+* User uploaded photos and avatars
+* Marked server node,  comments, evaluations and scores
+Information about this site and our contact information
+
 
 # WireFrames
 The wireframes can be hand drawn or made using a program. Use these wireframes in tandem with your written explanation above to clearly demonstrate the vision for your application to the course staff. 
