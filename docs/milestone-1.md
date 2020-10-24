@@ -1,7 +1,6 @@
 # Data Interaction
 
 # WireFrames
-!(imgs/2020-10-24 16.30.16.jpg)
-
+![example image](imgs/login.jpg)
 
 # HTML and CSS
