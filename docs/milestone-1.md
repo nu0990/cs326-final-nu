@@ -39,3 +39,6 @@ This image is the wireframe of our application's user profile page.
 This page contains five sections. First section includes basic information of a user. Next, a place for the user to modify the password. A user can also view and edit his favourite nodes, comments, and posts on this page.
 
 # HTML and CSS
+![example image](imgs/homepage1.png)
+![example image](imgs/login1.png)
+![example image](imgs/register1.png)
