@@ -39,4 +39,25 @@ This image is the wireframe of our application's user profile page.
 This page contains five sections. First section includes basic information of a user. Next, a place for the user to modify the password. A user can also view and edit his favourite nodes, comments, and posts on this page.
 
 # HTML and CSS
+* Login page
+![example image](imgs/login1.PNG)
+
+* Register page
+![example image](imgs/register1.PNG)
+
+* Home page
+![example image](imgs/homepage1.PNG)
+
+* Profile page
+![example image](imgs/profile2.png)
+![example image](imgs/profile.png)
+
+Division of labor
+* Sihan Cheng: Login/Register CSS/html, project management, data construct.
+* Yidan Gong: Profile/Homepage CSS/html, Wireframe Homepage and Profile, project management.
+* Haoyu Guan: Login, Register, homepage html, Login, Register, homepage CSS prototype; login/register wireframe, project management, discussion arrangement.
+
+
+
+
 
