@@ -22,17 +22,15 @@ body {
   border: 1px ;
   background-color: rgb(209, 224, 224);
   padding: 40px;
-  margin: 40px;
-  width:700px;
+  margin: 20px;
+  width:auto;
   height: auto;
 }
 
 .contentCard {
     background:rgb(152, 205, 207);
-    width: 70%;
-    max-width: 450px;
+    width: 38%;
     position: relative;
-    padding: 5% 5% 0 5%;
     text-align: center;
 }
 .footer {
