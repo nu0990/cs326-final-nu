@@ -1,6 +1,6 @@
 # Part 1 API Planning #
 
-`Get  /user/{USER_ID}` <br />
+`POST  /user/{USER_ID}` <br />
 Used for login to get a user’s information. <br />
 Parameters:{name, password} <br />
 response:{id, email} <br />
