@@ -1,8 +1,14 @@
-.header-top-wrapper{background:#1663f15b}
+.header-top-wrapper{background:#1abc9c}
 .header-top{padding:5rem 0;font-size:1rem;color:black}
 .header-top-left{float:left; font-size:3rem; color: white}
 .header-top-right{float:right}
-
+.posted-node {
+    padding: 1rem;
+    height:fliud;
+    border: 2px solid #1abc9c;
+    color: black;
+    text-align: left;
+}
 .underlineHover:after {
     display: block;
     left: 0;
@@ -40,7 +46,8 @@ body {
     background:#87ceeb;
     width:auto;
     margin-top:30px;
-  }
+}
 html {
     background-color: #87ceeb;
+
 }
