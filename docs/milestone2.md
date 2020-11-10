@@ -67,9 +67,21 @@ Response: new rating
 
 # Part 2 Screenshots of your client interface 
 ### Create
+![](imgs/c1.png)
+![](imgs/c2.png)
+In this example a user creates a post.
 ### Read
+![](imgs/profile.jpg)
+When entering dashboard the user interface will get fetched information for each part for user to read.
 ### Update 
+![](imgs/ud1.png)
+![](imgs/ud2.png)
+A user can update password or email in the dashboard.
 ### Delete 
+![](imgs/del1.png)
+![](imgs/del2.png)
+In this example,the user deletes a comment.
+
 # Part 3 Heroku Application
 
 # Labor division
