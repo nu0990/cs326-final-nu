@@ -1,5 +1,5 @@
 'use strict';
-import {baseURL,uid} from './constant.js';
+//import {baseURL,uid} from './constant.js';
 
 export async function node_post(uid,info,name,description){
     const data = { 
