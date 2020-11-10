@@ -83,5 +83,10 @@ A user can update password or email in the dashboard.
 In this example,the user deletes a comment.
 
 # Part 3 Heroku Application
+https://freelink-326.herokuapp.com/index.html
 
 # Labor division
+Yidan Gong: Front end homepage, register javascript. Updated profile.html, homepage.html. server update. API planning.
+-Haoyu Guan: login, profile html consummate, make new forgot password html; profile, login, forgotpw front end js; discussion arrangement
+-Sihan Cheng：Backend dev, database/API design, structure design, testing and advising
+
