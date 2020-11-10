@@ -1,0 +1,53 @@
+.header-top-wrapper{background:#1abc9c}
+.header-top{padding:5rem 0;font-size:1rem;color:black}
+.header-top-left{float:left; font-size:3rem; color: white}
+.header-top-right{float:right}
+.posted-node {
+    padding: 1rem;
+    height:fliud;
+    border: 2px solid #1abc9c;
+    color: black;
+    text-align: left;
+}
+.underlineHover:after {
+    display: block;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: #56baed;
+    content: "";
+    transition: width 0.2s;
+}
+
+.underlineHover:hover {
+    color: #0d0d0d;
+}
+
+.underlineHover:hover:after {
+    width: 100%;
+}
+body {
+    font-family: "Poppins", sans-serif;
+    height: auto;
+}
+.box{
+  border: 1px ;
+  background-color: white;
+  padding: 1px;
+  margin: 4px;
+  width:auto;
+  height: auto;
+}
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    background:#87ceeb;
+    width:auto;
+    margin-top:30px;
+}
+html {
+    background-color: #87ceeb;
+
+}

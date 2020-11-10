@@ -1,0 +1,41 @@
+.header {
+    height: 180px;
+    padding: 15px;
+    text-align:left;
+    background: #1abc9c;
+    color: white;
+    font-size: 20px;
+}
+.nav-item{
+   color:white;
+}
+
+html {
+    background-color: #87ceeb;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    height: auto;
+}
+.box {
+  border: 1px ;
+  background-color: rgb(209, 224, 224);
+  padding: 40px;
+  margin: 20px;
+  width:auto;
+  height: auto;
+}
+
+.contentCard {
+    background:rgb(152, 205, 207);
+    width: 38%;
+    position: relative;
+    text-align: center;
+}
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+  }
