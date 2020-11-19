@@ -1,6 +1,7 @@
 # DataBase document
 ![](imgs/DATABASE.png)
 
+* node
 | Column  | Datatype  | Description  |
 |---|---|---|
 | node id  | int  | id of the node  |
@@ -13,7 +14,7 @@
 | name | string  | location of node ip  |
 | description | string  | include url and ip |
 
-* user
+* user_table
 
 | column  | Datatype  | Description  |
 |---|---|---|
