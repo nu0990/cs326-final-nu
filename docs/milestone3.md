@@ -20,6 +20,7 @@
 | column  | Datatype  | Description  |
 |---|---|---|
 |  uid | int  | a number id of user  |
+|  salt | string  |random string for password protection|
 | email | string  | user's email address  |
 | name  | string  | user name  |
 | password | string  | password of user  |
