@@ -7,7 +7,7 @@
 | info  | json  | information for node |
 | score  | int  | rating of node |
 | uid  | int  | id of user who posted the node  |
-| update time  | int  | update time of node |
+| update time  | date  | update time of node |
 | visits  | int  | time visited  |
 | type  | json  | type of node  |
 | name | string  | location of node ip  |
@@ -28,7 +28,7 @@
 |---|---|---|
 | comment_id | int  | number id of comment  |
 | text  | string  | content of comment  |
-| update time  | data  | posted time of comment  |
+| update time  | date  | posted time of comment  |
 | node_id  | int  | id of node that has this comment  |
 | uid | int  | id of user who posted this comment  |
 
