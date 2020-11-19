@@ -2,6 +2,7 @@
 ![](imgs/DATABASE.png)
 
 * node
+
 | Column  | Datatype  | Description  |
 |---|---|---|
 | node id  | int  | id of the node  |
