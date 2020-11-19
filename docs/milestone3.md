@@ -30,7 +30,6 @@
 |---|---|---|
 | comment_id | int  | number id of comment  |
 | text  | string  | content of comment  |
-| update time  | date  | posted time of comment  |
 | node_id  | int  | id of node that has this comment  |
 | uid | int  | id of user who posted this comment  |
 
