@@ -1,14 +1,13 @@
 'use strict';
-//import {baseURL,uid} from './constant.js';
+const baseURL= 'http://localhost:8080' || 'https://freelink-326.herokuapp.com'
 
-export async function node_post(uid,info,name,description){
+export async function node_post(info,name,description){
     const data = { 
-      'uid':uid,
       'info':info,
       'name':name,
       'description':description
     };
-    const res=await fetch(baseURL+'/user/nodes', {
+    const res=await fetch(baseURL+'/nodes/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -20,20 +19,19 @@ export async function node_post(uid,info,name,description){
       });
 
     if(res.ok){
-       const id=res.JSON.stringify()
+       const id=res.text()
        return id
     }else{
         console.error('Error');}
     
 }
 
-export async function comment_post(uid,node_id,comment){
+export async function comment_post(node_id,comment){
     const data = { 
-      'uid':uid,
       'nid':node_id,
       'comment':comment
     };
-    const res=await fetch(baseURL+`/node/${node_id}/comments`, {
+    const res=await fetch(baseURL+`/node/comments/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +43,7 @@ export async function comment_post(uid,node_id,comment){
       });
 
     if(res.ok){
-       const comment_id=res.JSON.stringify()
+       const comment_id=res.text()
        return comment_id
     }else{
         console.error('Error');

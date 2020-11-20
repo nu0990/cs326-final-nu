@@ -68,7 +68,7 @@ function add_comment_listener(){
             const node_id=(n[n.length-1])
             const comment=document.getElementById(`user_comment${node_id}`).value
             //wait for comment id 
-            const comment_id= null //req.comment_post(uid,node_id,comment)
+            const comment_id=req.comment_post(node_id,comment)
             render_commment(node_id,comment,comment_id);
         })
     } 
@@ -92,7 +92,7 @@ document.getElementById("post_button").addEventListener('click',async()=>{
     const description=document.getElementById("post_url").value;
     const info=document.getElementById("post_info").value;
     //wait for node_id
-    const node_id= 2 //req.node_post(uid,info,name,description)||
+    const node_id=req.node_post(info,name,description)
     //render post to html
     render_post(node_id,name,description,info)
     add_comment_listener()

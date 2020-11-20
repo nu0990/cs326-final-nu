@@ -2,15 +2,13 @@ const createError = require('http-errors')
 const express = require('express')
 const path = require('path')
 const logger = require('morgan')
-// const indexRouter = require('./routes/index')
-// const usersRouter = require('./routes/users')
-// const apiRouter = require('./routes/api')
-// app.use('/', indexRouter)
-// app.use('/users', usersRouter)
-// app.use('/api', apiRouter)
-
+const db = require('./db_func')
 const app = express()
 
+const indexRouter = require('./routes/index')
+// const usersRouter = require('./routes/users')
+// app.use('/users', usersRouter)
+app.use('/', indexRouter)
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
@@ -32,11 +30,13 @@ const session = {
 // Passport configuration
 const strategy = new LocalStrategy(
   async (username, password, done) => {
-if (!findUser(username)) {
+const r1=await findUser(username)
+if (!r1) {
     // no such user
     return done(null, false, { 'message' : 'Wrong username' });
 }
-if (!validatePassword(username, password)) {
+const r2=await validatePassword(username, password)
+if (!r2) {
     // invalid password
     // should disable logins after N messages
     // delay return to rate-limit brute-force attacks
@@ -65,19 +65,10 @@ passport.deserializeUser((uid, done) => {
 
 /////
 
-// db Object for testing
-console.log(mc.hash('compsci326'));
-// let users = { 'emery' : 'compsci326' } // default user
-let users = { 'emery' : [
-  '2401f90940e037305f71ffa15275fb0d',
-  '61236629f33285cbc73dc563cfc49e96a00396dc9e3a220d7cd5aad0fa2f3827d03d41d55cb2834042119e5f495fc3dc8ba3073429dd5a5a1430888e0d115250',
-  'xxx@gmail'
-] };
-let userMap = {};
-
 // Returns true iff the user exists.
-function findUser(username) {
-  if (!users[username]) {
+async function findUser(username) {
+  const res=await db.findUser(username);
+  if (res.length === 0) {
        return false;
   } else {
        return true;
@@ -85,24 +76,28 @@ function findUser(username) {
 }
 
 // Returns true iff the password is the one we have stored (in plaintext = bad but easy).
-function validatePassword(name, pwd) {
-  if (!findUser(name)) {
+async function validatePassword(name, pwd) {
+  const res=await findUser(name)
+  if (!res) {
        return false;
     }
-    salt=users[name][0]
-    hash=users[name][1]
-    const res=mc.check(pwd,salt,hash);
-    return res;
+    const row=await db.findUser(name)
+    salt=row[0]['salt']
+    hash=row[0]['password']
+    //console.log(row[0])
+    const res2=mc.check(pwd,salt,hash);
+    return res2;
 }
 
 // Add a user to the "database".
-function addUser(name, pwd,email) {
-  if (!findUser(name)) {
-    const [salt, hash] = mc.hash(pwd);
-    users[name]=[salt, hash,email];
-    return true;
+async function addUser(name, pwd,email) {
+  const re=await findUser(name)
+  if (!re) {
+     const [salt, hash] = mc.hash(pwd);
+     db.insertUser(name,hash,email,salt);
+     return true;
   }else{
-  return false;
+     return false;
    }
 }
 
@@ -135,7 +130,7 @@ app.get('/login',
 (req, res) => res.sendFile('html/login.html',
          { 'root' : __dirname }));
 
-// Handle logging out (takes us back to the login page).
+// Handle logging out
 app.get('/logout', (req, res) => {
   req.logout(); // Logs us out!
   res.redirect('/index.html'); 
@@ -146,11 +141,12 @@ app.get('/logout', (req, res) => {
 // Use req.body to access data (as in, req.body['username']).
 // Use res.redirect to change URLs.
 app.post('/register',
- (req, res) => {
+ async function(req, res) {
      const username = req.body['name'];
      const password = req.body['password'];
      const email=req.body['email']
-     if (addUser(username, password,email)) {
+     const r=await addUser(username, password,email)
+     if (r) {
             res.redirect('/login');
      } else {
             res.redirect('/register');
