@@ -26,7 +26,7 @@ function render_post(id,name,description,info){
     button_group.innerHTML=
     '<button type="button" class="btn btn btn-outline-primary">favourite</button>'+
     `<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse${id}" aria-expanded="false" aria-controls="collapse${id}">show comment </button>`
-    +`<label for="x">&nbsprate: </label><input type="number" id="comment_${id}" min="1" max="10" />`
+    
     comment.innerHTML=
     `<input type="text" class="form-control" placeholder="user comment" id="user_comment${id}"></input>`
     +`<button type="button"  class="comment_button" id="comment${id}">comment</button>`

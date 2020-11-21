@@ -30,8 +30,6 @@ router.get('/node/all',getallNode);
 
 router.get('/node/comment/:node_id', getcomment)
 
-//router.post('/nodes/create',createNode)
-
 router.post('/user/favorite',Create_fav)
 
 module.exports = router
