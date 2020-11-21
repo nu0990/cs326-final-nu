@@ -8,6 +8,12 @@ async function deletecomment(comment_id) {
     })
 }
 
+async function deletePost(node_id) {
+  const res=await fetch((baseURL+`/user/nodes/${node_id}`), {
+    method: 'DELETE'
+  })
+}
+
 async function Update_password() {
     const pw=document.getElementById('newpassword').value
     const res=await fetch((baseURL+`/user/update/password`), {
@@ -30,20 +36,87 @@ async function Update_email() {
     })
 }
 
-function add_comment_listener(){
+function add_comment_listener(comment_b){
     for (let i = 0; i < comment_b.length; i++) {
         comment_b[i].addEventListener("click", () =>{ 
             const n=window.event.target.id;
-            const cid=n[n.length-1]
+            const cid=n
             const comment=document.getElementById(`co_${cid}`)
             comment.innerHTML=''
             //send delete req to server
             deletecomment(cid)
+            deletePost(cid)
         })
     } 
 }
-const comment_b=document.getElementsByClassName("btn btn-outline-primary delete_comment")
-add_comment_listener()
+
+
+
+
+//const comment_b=document.getElementsByClassName("btn btn-outline-primary delete_comment")
+//add_comment_listener()
 
 document.getElementById("change_email").addEventListener("click",Update_email);
 document.getElementById("changepw").addEventListener("click",Update_password);
+
+window.addEventListener("load", async function() {
+  const responseemail = await fetch(baseURL+'/user/email');
+  const responsename = await fetch(baseURL+'/user/name');
+  if (responseemail.ok){
+    const res=await responseemail.json();
+    document.getElementById('useremail').innerHTML=res[0]['email']
+  }else{
+    console.error('email Error');
+  }
+
+  if (responsename.ok){
+      document.getElementById('username').innerHTML=await responsename.text();
+    }else{
+      console.error('name Error');
+  }
+  const responsenode = await fetch(baseURL+'/user/nodes');
+    if (responsenode.ok){
+      let somenode= await responsenode.json();
+      const thediv= document.getElementById("POSTED");
+      for (let i=0; i<somenode.length;i++){
+        const newDiv = document.createElement("div");
+        const nid=somenode[i]['node_id']
+        newDiv.className="input-group"
+        newDiv.id='co_'+nid
+        const content='"'+somenode[i]['description']+somenode[i]['name']+'"'
+        console.log(content)
+        newDiv.innerHTML=`<input type="text" class="form-control" value=${content} id="numcomment">`
+        const button=document.createElement("div")
+        button.className="input-group-append"
+        button.innerHTML=`<button class="btn btn-outline-primary" type="button" id="${nid}">Delete</button>`
+        newDiv.appendChild(button)
+        thediv.appendChild(newDiv);
+      }
+     }else{
+      console.error('node Error');
+     }
+    
+    const res_c = await fetch(baseURL+'/user/comment');
+    if (responsenode.ok){
+      let comment= await res_c.json();
+      const thediv= document.getElementById("COMMENT");
+      for (let i=0; i<comment.length;i++){
+        const newDiv = document.createElement("div");
+        const cid=comment[i]['comment_id']
+        const content='"'+comment[i]['text']+'"'
+        newDiv.className="input-group"
+        newDiv.id='co_'+cid
+        console.log(content)
+        newDiv.innerHTML=` <input type="text" class="form-control" placeholder=${content}/>`
+        const button=document.createElement("div")
+        button.className="input-group-append"
+        button.innerHTML=`<button class="btn btn-outline-primary" type="button" id=${cid}>Delete</button>`
+        newDiv.appendChild(button)
+        thediv.appendChild(newDiv);
+    }
+    }else{
+      console.error('node Error');
+    }
+    const delb=document.getElementsByClassName("btn btn-outline-primary")
+    add_comment_listener(delb)
+})

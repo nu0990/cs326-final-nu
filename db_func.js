@@ -48,12 +48,22 @@ async function Get_ALLNode(){
 }
 //get comment for a user
 async function Get_UserComment(uid){
+  return await db.any("SELECT * FROM comment WHERE uid=$1;",uid);
+}
 
+//get posted node for a user
+async function Get_UserPost(uid){
+  return await db.any("SELECT * FROM node WHERE uid=$1;",uid);
 }
 
 //get comment for a node
 async function Get_NodeComment(nid){
    return await db.any("SELECT * FROM comment WHERE node_id=$1;",nid);
+}
+
+//Get user's email
+async function Get_email(uid){
+  return await db.any("SELECT email FROM user_table WHERE name=$1;",uid);
 }
 
 //delete a comment from db
@@ -68,8 +78,8 @@ async function DEL_Fav(uid,node_id) {
 }
 
 //delete a node posted by uid
-async function DEL_Node(uid,node_id){
-  
+async function DEL_Node(uid,nid){
+  return await db.none("DELETE FROM node WHERE uid=$1 AND node_id=$2;",[uid,nid]);
 }
 
 //update user's password
@@ -91,3 +101,7 @@ exports.addNode = addNode;
 exports.Get_ALLNode=Get_ALLNode;
 exports.addComment=addComment
 exports.Get_NodeComment = Get_NodeComment
+exports.Get_email = Get_email
+exports.Get_UserPost= Get_UserPost
+exports.Get_UserComment = Get_UserComment 
+exports.DEL_Node = DEL_Node

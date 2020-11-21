@@ -198,8 +198,6 @@ checkLoggedIn, // We also protect this route: authenticated...
 
 //delete a comment for a user
 app.delete('/user/comments/:cid',checkLoggedIn,async function(req, res) {
-   // Verify this is the right user.
-   console.log(req.user)
    const uid=req.user
    const cid=req.params.cid
    //Delete a comment with this uid from db
@@ -211,21 +209,23 @@ app.delete('/user/comments/:cid',checkLoggedIn,async function(req, res) {
 app.put('/user/update/:subject',updateHandler)
 
 //delete a node from user's fav
-app.delete('/user/favorite/nid:',checkLoggedIn,async function(req, res) {
-  // Verify this is the right user.
-  console.log(req.user)
+app.delete('/user/favorite/:nid',checkLoggedIn,async function(req, res) {
   const uid=req.user
   //Delete a comment with this uid from db
-  const r= await db.DEL_Comment(uid)
+  const r= await db.DEL_Node(uid)
   res.write('200')
 });
 
 //delete a node from user's posts
-//app.delete('/user/nodes/nid:',deleteHandler)
+app.delete('/user/nodes/:nid',checkLoggedIn, async function(req, res) {
+  const uid=req.user
+  const nid=req.params.nid
+  const r= await db.DEL_Node(uid,nid)
+  res.write('200')
+})
 
 //get content for pofile_page
 //app.get('/user/subject:',Get_Handler)
-
 
 async function createNode(req, res) {
   const info = req.body['info'];
@@ -252,6 +252,36 @@ async function createComment(req, res) {
   const r=await db.addComment(c_id,node_id,uid,content,date);
   res.send(c_id);
 }
+
+async function Getemail(req,res){
+  const content=await db.Get_email(req.user)
+  //console.log(content)
+  res.send(content)
+}
+
+async function Getname(req,res){
+  res.send(req.user)
+}
+
+async function GetNode(req,res){
+   const content=await db.Get_UserPost(req.user)
+   console.log(content)
+   res.json(content)
+}
+
+async function GetComment(req,res){
+  const content=await db.Get_UserComment(req.user)
+  console.log(content)
+  res.json(content)
+}
+
+app.get('/user/nodes',GetNode)
+
+app.get('/user/email',Getemail)
+
+app.get('/user/name',Getname)
+
+app.get('/user/comment',GetComment)
 
 app.post('/nodes/create',createNode)
 
