@@ -30,5 +30,8 @@
     "sequelize-cli": "^6.2.0",
     "standard": "^16.0.1",
     "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
   }
 }
