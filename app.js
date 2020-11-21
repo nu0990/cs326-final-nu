@@ -101,6 +101,20 @@ async function addUser(name, pwd,email) {
    }
 }
 
+async function updateHandler(req,res){
+  const subject=req.params.subject
+  const uid=req.user
+  if(subject==='email'){
+     const email=req.body['email']
+     await db.Update_email(uid,email)
+  }else{
+     const pwd=req.body['password']
+     const [salt, hash] = mc.hash(pwd);
+     await db.Update_pw(uid,hash,salt)
+  }
+  res.end()
+}
+
 // Routes
 function checkLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -121,7 +135,7 @@ checkLoggedIn,
 // Handle post data from the login.html form.
 app.post('/login',
  passport.authenticate('local' , {     // use username/password authentication
-     'successRedirect' : '/index.html',   // when we login, go to /private 
+     'successRedirect' : '/private',   // when we login, go to /private 
      'failureRedirect' : '/login'      // otherwise, back to login
  }));
 
@@ -175,13 +189,44 @@ checkLoggedIn, // We also protect this route: authenticated...
   //res.write('<H1>HELLO ' + req.params.userID + "</H1>");
   //res.write('<br/><a href="/logout">click here to logout</a>');
     res.redirect('/profile.html')
-  res.end();
+    res.end();
     } else {
-  res.redirect('/private/');
+    res.redirect('/private/');
     }
 });
 
-app.use(express.static('html'));
+//delete a comment for a user
+app.delete('/user/comments/:cid',checkLoggedIn,async function(req, res) {
+   // Verify this is the right user.
+   console.log(req.user)
+   const uid=req.user
+   const cid=req.params.cid
+   //Delete a comment with this uid from db
+   const r= await db.DEL_Comment(uid,cid)
+   res.write('200')
+});
 
+// update credential
+app.put('/user/update/:subject',updateHandler)
+
+
+//delete a node from user's fav
+app.delete('/user/favorite/nid:',checkLoggedIn,async function(req, res) {
+  // Verify this is the right user.
+  console.log(req.user)
+  const uid=req.user
+  //Delete a comment with this uid from db
+  const r= await db.DEL_Comment(uid)
+  res.write('200')
+});
+
+//delete a node from user's posts
+//app.delete('/user/nodes/nid:',deleteHandler)
+
+//get content for pofile_page
+//app.get('/user/subject:',Get_Handler)
+
+
+app.use(express.static('html'));
 
 module.exports = app
