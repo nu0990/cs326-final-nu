@@ -1,9 +1,11 @@
 'use strict';
+
 const baseURL= 'http://localhost:8080' || 'https://freelink-326.herokuapp.com'
 
 export async function node_post(info,name,description){
+    const in2=JSON.stringify(info)
     const data = { 
-      'info':info,
+      'info':in2,
       'name':name,
       'description':description
     };
@@ -26,10 +28,11 @@ export async function node_post(info,name,description){
     
 }
 
-export async function comment_post(node_id,comment){
+export async function comment_post(node_id,comment,date){
     const data = { 
       'nid':node_id,
-      'comment':comment
+      'comment':comment,
+      'date':date
     };
     const res=await fetch(baseURL+`/node/comments/create`, {
         method: 'POST',
@@ -51,7 +54,7 @@ export async function comment_post(node_id,comment){
     
 }
 
-export function fav_post(uid,node_id){
+export async function fav_post(uid,node_id){
     const data = { 
         'uid':uid,
         'node_id':node_id
@@ -68,3 +71,4 @@ export function fav_post(uid,node_id){
           console.error('Error:', error);
         });
 }
+

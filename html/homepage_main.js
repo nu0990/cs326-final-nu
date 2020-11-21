@@ -1,6 +1,8 @@
 'use strict';
 import * as req from './homepage_client.js'
 
+const baseURL= 'http://localhost:8080' || 'https://freelink-326.herokuapp.com'
+
 function render_post(id,name,description,info){
     const container=document.getElementById("posted_node");
 
@@ -38,7 +40,7 @@ function render_post(id,name,description,info){
     container.appendChild(child);
 }
 
-function render_commment(id,comment,comment_id){
+function render_commment(id,comment,comment_id,date){
     
     const parent=document.getElementById(`collapse${id}`)
     const child0=document.createElement('div')
@@ -47,7 +49,6 @@ function render_commment(id,comment,comment_id){
     child0.className='input-group'
 
     child.className="input-group-prepend"
-    const date=new Date().toLocaleDateString()
     child.innerHTML=`<span class="input-group-text">${date}</span>`
 
     text.className="form-control"
@@ -65,11 +66,12 @@ function add_comment_listener(){
     for (let i = 0; i < comment_b.length; i++) {
         comment_b[i].addEventListener("click", () =>{ 
             const n=event.target.id;
-            const node_id=(n[n.length-1])
+            const node_id=n.slice(7)
             const comment=document.getElementById(`user_comment${node_id}`).value
+            const date=new Date().toLocaleDateString()
             //wait for comment id 
-            const comment_id=req.comment_post(node_id,comment)
-            render_commment(node_id,comment,comment_id);
+            const comment_id=req.comment_post(node_id,comment,date)
+            render_commment(node_id,comment,comment_id,date);
         })
     } 
 }
@@ -85,6 +87,34 @@ function add_fav_listener(){
     } 
 
 }
+
+
+window.addEventListener("load", async function() {
+    const response=await fetch(baseURL+'/node/all');
+    if(response.ok){
+        const r =await response.json()
+        console.log(r)
+        r.forEach( async function(element) {
+            const id=element['node_id']
+            const name=element['name']
+            const description=element['description']
+            const info='other info'
+            render_post(id,name,description,info)
+            const res2=await fetch(baseURL+`/node/comment/${id}`);
+            const res3=await res2.json()
+            console.log(res3)
+            res3.forEach(ele=>{
+                const comment_id=ele['comment_id']
+                const comment=ele['text']
+                const date=ele['create_date']
+                render_commment(id,comment,comment_id,date)
+            }) 
+        });
+       }else{
+        console.error('Error');
+       }
+       add_comment_listener()
+})
 
 //post button
 document.getElementById("post_button").addEventListener('click',async()=>{ 
@@ -106,5 +136,3 @@ add_comment_listener()
 //fav
 const fav_b=document.getElementsByClassName('fav_button')
 add_fav_listener()
-
-

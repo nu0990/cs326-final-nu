@@ -34,15 +34,18 @@ async function insertUser(name, pwd,email,salt) {
 }
 
 //Save Node to db
-async function SaveNode() {
-  
+async function addNode(uid,node_id,info,nodeName,des){
+  return await db.none("INSERT INTO node VALUES ($1,$2,$3,$4,$5);",[node_id,info,uid,nodeName,des]);
 }
 
 //Save comment to db
-async function SaveComment() {
-   
+async function addComment(comment_id,node_id,uid,content,date) {
+  return await db.none("INSERT INTO comment VALUES ($1,$2,$3,$4,$5)",[comment_id,content,node_id,uid,date])
 }
-
+//get all a node
+async function Get_ALLNode(){
+  return await db.any("SELECT info, description, name, node_id FROM node;");
+}
 //get comment for a user
 async function Get_UserComment(uid){
 
@@ -50,7 +53,7 @@ async function Get_UserComment(uid){
 
 //get comment for a node
 async function Get_NodeComment(nid){
- 
+   return await db.any("SELECT * FROM comment WHERE node_id=$1;",nid);
 }
 
 //delete a comment from db
@@ -84,3 +87,7 @@ exports.insertUser = insertUser;
 exports.DEL_Comment = DEL_Comment;
 exports.Update_email = Update_email;
 exports.Update_pw = Update_pw;
+exports.addNode = addNode;
+exports.Get_ALLNode=Get_ALLNode;
+exports.addComment=addComment
+exports.Get_NodeComment = Get_NodeComment

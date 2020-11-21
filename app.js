@@ -3,11 +3,12 @@ const express = require('express')
 const path = require('path')
 const logger = require('morgan')
 const db = require('./db_func')
+const { v1: uuidv1 } = require('uuid');
 const app = express()
 
 const indexRouter = require('./routes/index')
-// const usersRouter = require('./routes/users')
-// app.use('/users', usersRouter)
+//const usersRouter = require('./routes/users')
+//app.use('/users', usersRouter)
 app.use('/', indexRouter)
 app.use(logger('dev'))
 app.use(express.json())
@@ -209,7 +210,6 @@ app.delete('/user/comments/:cid',checkLoggedIn,async function(req, res) {
 // update credential
 app.put('/user/update/:subject',updateHandler)
 
-
 //delete a node from user's fav
 app.delete('/user/favorite/nid:',checkLoggedIn,async function(req, res) {
   // Verify this is the right user.
@@ -226,6 +226,36 @@ app.delete('/user/favorite/nid:',checkLoggedIn,async function(req, res) {
 //get content for pofile_page
 //app.get('/user/subject:',Get_Handler)
 
+
+async function createNode(req, res) {
+  const info = req.body['info'];
+  const nodeName=req.body['name'];
+  const des=req.body['description'];
+  const uid=req.user;
+  //gernerate a node_id
+  const node_id=uuidv1();
+  console.log(uid,node_id)
+  //save node to database
+  await db.addNode(uid,node_id,info,nodeName,des);
+  //node[node_id]=[info,nodeName,des];
+  res.send(node_id);
+}
+
+async function createComment(req, res) {
+  const node_id=req.body['nid']
+  const uid=req.user
+  const date=req.body['date']
+  const content=req.body['comment']
+  //gernerate a node_id
+  const c_id=uuidv1()
+  //save comment to database
+  const r=await db.addComment(c_id,node_id,uid,content,date);
+  res.send(c_id);
+}
+
+app.post('/nodes/create',createNode)
+
+app.post('/node/comments/create',createComment)
 
 app.use(express.static('html'));
 
