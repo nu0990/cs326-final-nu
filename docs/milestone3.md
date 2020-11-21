@@ -1,6 +1,4 @@
 # DataBase document
-![](imgs/DATABASE.png)
-
 * node
 
 | Column  | Datatype  | Description  |
@@ -9,7 +7,6 @@
 | info  | json  | information for node |
 | score  | int  | rating of node |
 | uid  | int  | id of user who posted the node  |
-| update time  | date  | update time of node |
 | visits  | int  | time visited  |
 | type  | json  | type of node  |
 | name | string  | location of node ip  |
@@ -19,8 +16,7 @@
 
 | column  | Datatype  | Description  |
 |---|---|---|
-|  uid | int  | a number id of user  |
-|  salt | string  |random string for password protection|
+| salt | string  |random string for password protection|
 | email | string  | user's email address  |
 | name  | string  | user name  |
 | password | string  | password of user  |
