@@ -31,5 +31,5 @@
 # Labor division
 * Sihan Cheng：
 * Yidan Gong:Backend implementation in app.js,db_func.js and index.js. Homepage and profile rendering update.
-* Haoyu Guan:
+* Haoyu Guan:Login, profile page front-end and back-end js integration and docking, testing, debugging, meeting arrangement
 
