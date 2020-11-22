@@ -75,18 +75,17 @@ function add_comment_listener(){
         })
     } 
 }
-
+/*
 function add_fav_listener(){
     for (let i = 0; i < fav_b.length; i++) {
         fav_b[i].addEventListener("click", () =>{ 
             const n=event.target.id;
             const node_id=(n[n.length-1])
-            //req.fav_post(uid,node_id)
             alert('added to collection')
         })
     } 
 
-}
+}*/
 
 
 window.addEventListener("load", async function() {
