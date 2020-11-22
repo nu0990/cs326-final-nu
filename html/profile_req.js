@@ -1,5 +1,5 @@
 'use strict';
-const baseURL= 'http://localhost:8080' || 'https://mighty-sands-25959.herokuapp.comps://mighty-sands-25959.herokuapp.com'
+const baseURL= 'https://mighty-sands-25959.herokuapp.com'
 
 async function deletecomment(comment_id) {
     
