@@ -1,7 +1,7 @@
 'use strict';
 import * as req from './homepage_client.js'
 
-const baseURL= 'http://localhost:8080' || 'https://mighty-sands-25959.herokuapp.com/'
+const baseURL= 'https://freelink-326.herokuapp.com'
 
 function render_post(id,name,description,info){
     const container=document.getElementById("posted_node");

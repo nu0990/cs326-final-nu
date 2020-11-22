@@ -1,6 +1,6 @@
 'use strict';
 
-const baseURL= 'http://localhost:8080' || 'https://mighty-sands-25959.herokuapp.com/'
+const baseURL= 'https://freelink-326.herokuapp.com'
 
 export async function node_post(info,name,description){
     const in2=JSON.stringify(info)
