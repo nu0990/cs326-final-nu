@@ -61,7 +61,7 @@ window.addEventListener('load', async function () {
   if (responseemail.ok) {
     const res = await responseemail.json()
     const emailHash = CryptoJS.MD5(responseemail)
-    document.getElementById('user-avatar').src = 'https://www.gravatar.com/avatar/' + emailHash
+    document.getElementById('user-avatar').src = 'https://www.gravatar.com/avatar/' + emailHash.toString()
     document.getElementById('useremail').innerHTML = res[0].email
   } else {
     console.error('email Error')
