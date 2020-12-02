@@ -51,3 +51,8 @@ html {
     background-color: #87ceeb;
 
 }
+
+div.card-text {
+    width: 400;
+    border: 1px solid black;
+  }
