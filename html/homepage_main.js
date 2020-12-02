@@ -1,11 +1,11 @@
 'use strict';
 import * as req from './homepage_client.js'
 
-const baseURL= 'https://freelink-326.herokuapp.com'
+let baseURL= 'https://freelink-326.herokuapp.com'
 
 function render_post(id,name,description,info){
     const container=document.getElementById("posted_node");
-
+    
     const child=document.createElement('div');
     child.className=`card${id}`
     child.id=id;
@@ -24,7 +24,6 @@ function render_post(id,name,description,info){
     header.innerHTML='<h5>'+name+'</h5>'+'<h6 class="text-muted">'+info+'</h6>'
     text.innerHTML='<p>'+description+'</p>'
     button_group.innerHTML=
-    '<button type="button" class="btn btn btn-outline-primary">favourite</button>'+
     `<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse${id}" aria-expanded="false" aria-controls="collapse${id}">show comment </button>`
     
     comment.innerHTML=
@@ -75,18 +74,6 @@ function add_comment_listener(){
         })
     } 
 }
-/*
-function add_fav_listener(){
-    for (let i = 0; i < fav_b.length; i++) {
-        fav_b[i].addEventListener("click", () =>{ 
-            const n=event.target.id;
-            const node_id=(n[n.length-1])
-            alert('added to collection')
-        })
-    } 
-
-}*/
-
 
 window.addEventListener("load", async function() {
     const response=await fetch(baseURL+'/node/all');
@@ -97,7 +84,7 @@ window.addEventListener("load", async function() {
             const id=element['node_id']
             const name=element['name']
             const description=element['description']
-            const info='other info'
+            const info=element['info']
             render_post(id,name,description,info)
             const res2=await fetch(baseURL+`/node/comment/${id}`);
             const res3=await res2.json()
