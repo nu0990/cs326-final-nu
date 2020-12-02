@@ -29,7 +29,7 @@
 | create_date | string  | create date of this comment  |
 
 # Labor division
-* Sihan Cheng：
+* Sihan Cheng：database and online dev debug, sharing design ideas that no one listens to, web framework fixes and proposals to change db_func
 * Yidan Gong:Backend implementation in app.js,db_func.js and index.js. Homepage and profile rendering update.
-* Haoyu Guan:
+* Haoyu Guan:Login, profile page front-end and back-end js integration, testing, debugging, meeting arrangement
 
