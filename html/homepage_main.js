@@ -22,7 +22,7 @@ function render_post(id,name,description,info){
     collapse.id=`collapse${id}`
    
     header.innerHTML='<h5>'+name+'</h5>'+'<h6 class="text-muted">'+info+'</h6>'
-    text.innerHTML='<p>'+description+'</p>'
+    text.innerHTML=description
     button_group.innerHTML=
     `<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse${id}" aria-expanded="false" aria-controls="collapse${id}">show comment </button>`
     
