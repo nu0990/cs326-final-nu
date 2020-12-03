@@ -52,7 +52,7 @@ html {
 
 }
 
-div.card-text {
+div.card {
     width: 400;
     border: 1px solid black;
   }
