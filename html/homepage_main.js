@@ -7,7 +7,7 @@ function render_post(id,name,description,info){
     const container=document.getElementById("posted_node");
     
     const child=document.createElement('div');
-    child.className=`card${id}`
+    child.className=`card card${id}`
     child.id=id;
     const header=document.createElement('div');
     header.className='card-header'
