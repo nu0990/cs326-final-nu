@@ -60,8 +60,8 @@ window.addEventListener('load', async function () {
   const responsename = await fetch(baseURL + '/user/name')
   if (responseemail.ok) {
     const res = await responseemail.json()
-    const emailHash = CryptoJS.MD5(responseemail)
-    document.getElementById('user-avatar').src = 'https://www.gravatar.com/avatar/' + emailHash.toString()
+    const emailHash = CryptoJS.MD5(res[0].email.toLowerCase()).toString()
+    document.getElementById('user-avatar').src = 'https://www.gravatar.com/avatar/' + emailHash.toString() + '?s=256'
     document.getElementById('useremail').innerHTML = res[0].email
   } else {
     console.error('email Error')
