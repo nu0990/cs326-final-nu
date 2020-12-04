@@ -91,7 +91,8 @@ During the design of user interface,we learned a lot about using frontend tools 
 There are some technical difficulties while implementing frontend javascript and the difficulties was solved by learning more html dom knowledges.
 We think it would be better if we had more knowledge about authentication and rendering using javascript.
 
-
+### Grading rubric:
+![Index page](imgs/rubric.png)
 
 
 
