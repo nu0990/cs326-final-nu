@@ -52,7 +52,7 @@ html {
 
 }
 
-div.card {
-    width: 400;
+.card {
+    width: 49rem;
     border: 1px solid black;
-  }
+}
