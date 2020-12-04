@@ -12,4 +12,4 @@ $ npm start
 
 Change BaseUrl to http://localhost:8080/
 
-Set up local postgres database according to milestone3.md
+Set up and connect to local postgres database according to milestone3.md
